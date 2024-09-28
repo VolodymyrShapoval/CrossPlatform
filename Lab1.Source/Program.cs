@@ -21,13 +21,17 @@ namespace Lab1.Source
             string inputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\input.txt");
             string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\output.txt");
 
-            (ushort n, ushort m) = GetValues(inputPath);
-            long result = HeadsAndTails.CalculateNumOfTailsCombinations(n, m);
+            try
+            {
+                (ushort n, ushort m) = GetValues(inputPath);
+                long result = HeadsAndTails.CalculateNumOfTailsCombinations(n, m);
 
-            File.WriteAllText(outputPath, result.ToString());
+                File.WriteAllText(outputPath, result.ToString());
+            }
+            catch
+            {
 
-            Console.WriteLine($"Process has been finished with result: {result}");
-            Console.ReadKey();
+            }
         }
     }
 }
