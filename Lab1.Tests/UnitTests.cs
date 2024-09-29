@@ -65,7 +65,7 @@ namespace Lab1.Tests
         [InlineData("")]
         [InlineData("2 0 1")]
         [InlineData("1")]
-        public void TestGetValues_InvalidTypeOfValue_ReturnInvalidDataException(string testText)
+        public void TestGetValues_InvalidNumberOfValues_ReturnInvalidDataException(string testText)
         {
             string inputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\testInput.txt");
             File.WriteAllText(inputPath, testText);
