@@ -2,18 +2,18 @@
 
 namespace Lab1.Source
 {
-    class Program
+    public class Program
     {
         public static (ushort, ushort) GetValues(string path)
         {
             string text = File.ReadAllText(path);
             ushort[] vals = text.Split(new[] { ' ', ',', }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => ushort.TryParse(x, out ushort value) ? value : throw new FormatException("Each value has to be integer type!"))
+                .Select(x => ushort.TryParse(x, out ushort value) ? value : throw new FormatException("Each value must be an integer and non-negative!"))
                 .ToArray();
 
             if(vals.Length == 2) 
                 return (vals.First(), vals.Last());
-            throw new InvalidDataException("Input file has to contain only 2 values of integer type!");
+            else throw new InvalidDataException("The input file must contain only 2 values of integer type!");
         }
 
         public static void Main(string[] args)
@@ -28,9 +28,9 @@ namespace Lab1.Source
 
                 File.WriteAllText(outputPath, result.ToString());
             }
-            catch
+            catch(Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
     }
