@@ -1,18 +1,23 @@
 ﻿using Lab1.Source.Methods;
+using System.Reflection.Metadata;
 
 namespace Lab1.Source
 {
     public class Program
     {
-        public static (ushort, ushort) GetValues(string path)
+        public static (short, short) GetValues(string path)
         {
             string text = File.ReadAllText(path);
-            ushort[] vals = text.Split(new[] { ' ', ',', }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => ushort.TryParse(x, out ushort value) ? value : throw new FormatException("Each value must be an integer and non-negative!"))
+            short[] vals = text.Split(new[] { ' ', ',', }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => short.TryParse(x, out short value) ? value : throw new FormatException("Each value must be an integer and non-negative!"))
                 .ToArray();
 
-            if(vals.Length == 2) 
+            if (vals.Length == 2) 
+            {
+                if (vals.First() < 1 || vals.First() > 20)  throw new ArgumentOutOfRangeException("Number of tosses must be in range 1 <= numberOfTosses <= 20");
+                if (vals.Last() < 0 || vals.Last() > vals.First()) throw new ArgumentOutOfRangeException($"Number of tails must be in range 0 <= numberOfTails <= numberOfTosses({vals.First()})");
                 return (vals.First(), vals.Last());
+            }
             else throw new InvalidDataException("The input file must contain only 2 values of integer type!");
         }
 
@@ -23,7 +28,7 @@ namespace Lab1.Source
 
             try
             {
-                (ushort n, ushort m) = GetValues(inputPath);
+                (short n, short m) = GetValues(inputPath);
                 long result = HeadsAndTails.CalculateNumOfTailsCombinations(n, m);
 
                 File.WriteAllText(outputPath, result.ToString());

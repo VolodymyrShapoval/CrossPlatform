@@ -17,8 +17,6 @@ namespace Lab1.Source.Methods
         /// <returns></returns>
         public static long CalculateNumOfTailsCombinations(int tossesNum, int tailsNum)
         {
-            if (tailsNum > tossesNum) throw new ArgumentException("The number of tosses cannot be smaller than the number of expected results!");
-            if(tossesNum == 0) return 0;
             if(tailsNum == 0) return (long)Math.Pow(2, tossesNum);
 
             long allCombinationsNum = (long)Math.Pow(2, tossesNum);
