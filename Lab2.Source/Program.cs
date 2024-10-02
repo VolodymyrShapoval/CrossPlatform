@@ -2,14 +2,14 @@
 
 namespace Lab2.Source
 {
-    class Program
+    public class Program
     {
         public static (ushort, ushort[]) GetValues(string path)
         {
             string[] lines;
 
             if (File.Exists(path))
-                lines = File.ReadAllLines(path).Where(x => x != string.Empty).ToArray();
+                lines = File.ReadAllLines(path).Where(x => x != string.Empty).Take(2).ToArray();
             else throw new FileNotFoundException();
 
             ushort count = 0;
@@ -20,8 +20,7 @@ namespace Lab2.Source
                 count = ushort.TryParse(lines[0], out ushort result) 
                     ? result 
                     : throw new FormatException("The first line has to contain only 1 value of integer type - number of platforms!");
-                heights = lines.Skip(1)
-                    .SelectMany(line => line.Split(new[] { ' ', ',', }, StringSplitOptions.RemoveEmptyEntries))
+                heights = lines[1].Split(new[] { ' ', ',', }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => ushort.TryParse(x, out ushort result) ? result : throw new FormatException("Each value must be an integer and non-negative!"))
                     .ToArray();
             }
@@ -34,9 +33,9 @@ namespace Lab2.Source
 
             if(count < 1 || count > 30000)
                 throw new ArgumentOutOfRangeException("Number of platforms must be in range 1 <= numberOfPlatforms <= 30000");
-            if(heights.Length < count)
+            if(heights.Length < count || heights.Length > count)
                 throw new ArgumentException($"Number of height values must to equal to the number of platforms({count})");
-            if(heights.All(x => x > 30000))
+            if(heights.Any(x => x > 30000 || x < 1))
                 throw new ArgumentOutOfRangeException($"Height values must be in range 0 <= height <= 30000");
             
             return (count, heights);

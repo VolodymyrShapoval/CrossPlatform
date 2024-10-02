@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\Lab2.Source\Lab2.Source.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

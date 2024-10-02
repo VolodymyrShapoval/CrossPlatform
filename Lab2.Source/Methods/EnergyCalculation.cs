@@ -12,7 +12,7 @@ namespace Lab2.Source.Methods
         /// Method for calculation of the minimum value of energy to achieve the goal
         /// </summary>
         /// <param name="platformsNum">Number of platforms</param>
-        /// <param name="heights">Array of platforms height values</param>
+        /// <param name="heights">Array of platform height values</param>
         /// <returns></returns>
         public static long CalculateMinEnergyValue(ushort platformsNum, ushort[] heights)
         {
