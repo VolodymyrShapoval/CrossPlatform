@@ -32,13 +32,14 @@ namespace Lab3.Source.Methods
 
         public static sbyte SearchMinSteps(Tuple<byte, byte> startCell, Tuple<byte, byte> endCell)
         {
+            byte startColor = GetCellColor(startCell.Item1, startCell.Item2);
+            int endColor = GetCellColor(endCell.Item1, endCell.Item2);
+            
             if (startCell.Equals(endCell)) 
                 return 0;
-            if (GetCellColor(startCell.Item1, startCell.Item2) == 0 
-                && GetCellColor(endCell.Item1, endCell.Item2) == 1)
+            if (startColor == 0 && endColor == 1)
                 return -1;
-            if (GetCellColor(startCell.Item1, startCell.Item2) == 1
-                && GetCellColor(endCell.Item1, endCell.Item2) == 1)
+            if (startColor == 1 && endColor == 1)
                 return -1;
 
             // Queue for BFS Algorithm
