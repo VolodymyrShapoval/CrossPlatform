@@ -17,8 +17,8 @@ namespace Lab3.Source.Methods
         private static readonly sbyte[] knightMovesY = { 1, -1, 2, -2, 1, -1, 2, -2 };
 
         // Bishop moves
-        private static readonly sbyte[] bishopMovesX = { 1, 1, -1, -1 };
-        private static readonly sbyte[] bishopMovesY = { 1, -1, 1, -1 };
+        private static readonly sbyte[] bishopMovesX = { 1, 1, -1, -1};
+        private static readonly sbyte[] bishopMovesY = { 1, -1, 1, -1};
 
         private static byte GetCellColor(byte x, byte y)
         {
@@ -34,6 +34,12 @@ namespace Lab3.Source.Methods
         {
             if (startCell.Equals(endCell)) 
                 return 0;
+            if (GetCellColor(startCell.Item1, startCell.Item2) == 0 
+                && GetCellColor(endCell.Item1, endCell.Item2) == 1)
+                return -1;
+            if (GetCellColor(startCell.Item1, startCell.Item2) == 1
+                && GetCellColor(endCell.Item1, endCell.Item2) == 1)
+                return -1;
 
             // Queue for BFS Algorithm
             Queue<(Tuple<byte, byte>, byte)> queue = new Queue<(Tuple<byte, byte>, byte)>();
@@ -52,42 +58,40 @@ namespace Lab3.Source.Methods
                 if(currentCell.Equals(endCell))
                     return (sbyte)movesCount;
                 
-                byte cellColor = GetCellColor(startCell.Item1, startCell.Item2);
-                if(cellColor == 0) // white
+                byte cellColor = GetCellColor(currentCell.Item1, currentCell.Item2);
+                if(cellColor == 0) // black
+                {
+                    for (byte i = 0; i < bishopMovesX.Length; i++)
+                    {
+                        for (byte m = 1; m < boardSize; m++)
+                        {
+                            byte newX = (byte)(x + bishopMovesX[i] * m);
+                            byte newY = (byte)(y + bishopMovesY[i] * m);
+
+                            if (IsWithinBoard(newX, newY) && !visitedMatrix[newX, newY])
+                            {
+                                queue.Enqueue((new Tuple<byte, byte>(newX, newY), (byte)(movesCount + 1)));
+                                visitedMatrix[newX, newY] = true;
+                            }
+                        }
+                    }
+                }
+                else // white
                 {
                     for (byte i = 0; i < knightMovesX.Length; i++)
                     {
                         byte newX = (byte)(x + knightMovesX[i]);
                         byte newY = (byte)(y + knightMovesY[i]);
 
-                        if(IsWithinBoard(newX, newY) && !visitedMatrix[newX, newY])
+                        if (IsWithinBoard(newX, newY) && !visitedMatrix[newX, newY])
                         {
                             queue.Enqueue((new Tuple<byte, byte>(newX, newY), (byte)(movesCount + 1)));
                             visitedMatrix[newX, newY] = true;
                         }
                     }
                 }
-                else // black
-                {
-                    for(byte i = 0; i < bishopMovesX.Length; i++)
-                    {
-                        byte newX = (byte)(x + bishopMovesX[i]);
-                        byte newY = (byte)(y + bishopMovesY[i]);
-
-                        if(IsWithinBoard(newX, newY) && !visitedMatrix[newX, newY])
-                        {
-                            queue.Enqueue((new Tuple<byte, byte>(newX, newY), (byte)(movesCount+1)));
-                            visitedMatrix[newX, newY] = true;
-                        }
-                    }
-                }
             }
             return -1;
-        }
-
-        private void BFS()
-        {
-
         }
     }
 }

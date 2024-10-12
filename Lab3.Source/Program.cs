@@ -2,7 +2,7 @@
 
 namespace Lab3.Source
 {
-    class Program
+    public class Program
     {
         public static (Tuple<byte, byte>, Tuple<byte, byte>) GetValues(string path)
         {
@@ -61,9 +61,6 @@ namespace Lab3.Source
                 (Tuple<byte, byte> startCell, 
                 Tuple<byte, byte> endCell) = GetValues(inputPath);
                 sbyte result = MythicalChess.SearchMinSteps(startCell, endCell);
-
-                if (result == -1)
-                    throw new Exception("Result hasn't gotten!");
 
                 File.WriteAllText(outputPath, result.ToString());
             }
