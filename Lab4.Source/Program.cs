@@ -10,7 +10,16 @@ namespace Lab4.Source
     public class Program
     {
         public static void Main(string[] args)
-            => CommandLineApplication.Execute<Program>(args);
+        {
+            try
+            {
+                CommandLineApplication.Execute<Program>(args);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
 
         private void OnExecute()
         {
@@ -36,7 +45,7 @@ namespace Lab4.Source
         {
             [Option("-P|--path <PATH>", "Path to the folder with input and output files", CommandOptionType.SingleValue)]
             [Required]
-            public string LabPath { get; set; }
+            public string LabPath { get; set; } = string.Empty;
 
             private void OnExecute()  // Change this to public
             {
@@ -67,7 +76,7 @@ namespace Lab4.Source
             protected override void OnLabExecute()
             {
                 SetPath("Lab1");
-                LabsLibrary.ExecuteLab(1, InputFilePath, OutputFilePath);
+                LabsLibrary.ExecuteLab(1, InputFilePath!, OutputFilePath!);
             }
         }
 
@@ -77,7 +86,7 @@ namespace Lab4.Source
             protected override void OnLabExecute()
             {
                 SetPath("Lab2");
-                LabsLibrary.ExecuteLab(2, InputFilePath, OutputFilePath);
+                LabsLibrary.ExecuteLab(2, InputFilePath!, OutputFilePath!);
             }
         }
 
@@ -87,17 +96,17 @@ namespace Lab4.Source
             protected override void OnLabExecute()
             {
                 SetPath("Lab3");
-                LabsLibrary.ExecuteLab(3, InputFilePath, OutputFilePath);
+                LabsLibrary.ExecuteLab(3, InputFilePath!, OutputFilePath!);
             }
         }
 
         public abstract class LabCommandBase
         {
             [Option("-I|--input <INPUT>", "Input file", CommandOptionType.SingleValue)]
-            public string? InputFilePath { get; set; }
+            public string? InputFilePath { get; set; } = null;
 
             [Option("-o|--output <OUTPUT>", "Output file", CommandOptionType.SingleValue)]
-            public string? OutputFilePath { get; set; }
+            public string? OutputFilePath { get; set; } = null;
 
             protected abstract void OnLabExecute();
 
@@ -116,14 +125,11 @@ namespace Lab4.Source
                 }
 
                 // 3. Використання базового шляху, якщо не задано інші шляхи
-                if(string.IsNullOrEmpty(InputFilePath) && string.IsNullOrEmpty(OutputFilePath))
-                {
-                    InputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "input.txt");
-                    OutputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "output.txt");
-                }
+                InputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "input.txt");
+                OutputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "output.txt");
 
                 if(!File.Exists(InputFilePath))
-                    Console.WriteLine("Error: Could not find the specified input file.");
+                    throw new Exception("Could not find the specified input file.");
             }
 
             protected void OnExecute()

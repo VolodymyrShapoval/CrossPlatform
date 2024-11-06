@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{65353225-1D0F-402B-9874-2B35179E6950}"
 	ProjectSection(SolutionItems) = preProject
 		build.proj = build.proj
+		Vagrantfile = Vagrantfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab2", "Lab2", "{86757BC2-539D-42C3-BB95-8C5751D82DFB}"
@@ -28,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab3.Tests", "Lab3.Tests\La
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab4", "Lab4", "{4976F7F0-1C49-49BB-B142-63FDEDD6EFDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab4.Source", "Lab4.Source\Lab4.Source.csproj", "{C8BE5711-396A-4203-AAF5-FD4CB643E903}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab4.Source", "Lab4.Source\Lab4.Source.csproj", "{C8BE5711-396A-4203-AAF5-FD4CB643E903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab4.Library", "Lab4.Library\Lab4.Library.csproj", "{5E6AD534-87E5-43BC-A5A9-4048655D8967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab4.Library", "Lab4.Library\Lab4.Library.csproj", "{5E6AD534-87E5-43BC-A5A9-4048655D8967}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
