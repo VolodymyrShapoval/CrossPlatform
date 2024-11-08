@@ -55,7 +55,8 @@ namespace Lab4.Source
                     return;
                 }
 
-                Environment.SetEnvironmentVariable("LAB_PATH", LabPath);
+                EnvironmentVariableTarget target = EnvironmentVariableTarget.User;
+                Environment.SetEnvironmentVariable("LAB_PATH", LabPath, target);
                 Console.WriteLine($"LAB_PATH set to: {LabPath}");
             }
         }
@@ -117,7 +118,8 @@ namespace Lab4.Source
                     return;
 
                 // 2. Перевірка значення змінної “LAB_PATH”
-                string? envPath = Environment.GetEnvironmentVariable("LAB_PATH");
+                EnvironmentVariableTarget target = EnvironmentVariableTarget.User;
+                string? envPath = Environment.GetEnvironmentVariable("LAB_PATH", target);
                 if(!string.IsNullOrEmpty(envPath))
                 {
                     InputFilePath ??= Path.Combine(envPath, "input.txt");

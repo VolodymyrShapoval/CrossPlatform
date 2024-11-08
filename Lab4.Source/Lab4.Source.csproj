@@ -5,6 +5,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>VShapoval</PackageId>
+    <Title>VShapoval</Title>
+    <Authors>Volodymyr Shapoval</Authors>
+    <Description>Tool for calling labs</Description>
+    <PackAsTool>True</PackAsTool>
+    <ToolCommandName>Lab4</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
