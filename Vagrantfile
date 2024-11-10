@@ -1,13 +1,14 @@
 Vagrant.configure("2") do |config|
   # Вказуємо Linux box (Ubuntu 18.04)
-  linux.vm.box = "hashicorp/bionic64"
-  linux.vm.hostname = "linux-vm"
-  linux.vm.network "public_network"
+  config.vm.define "linux" do |linux|
+    linux.vm.box = "hashicorp/bionic64"
+    linux.vm.hostname = "linux-vm"
+    linux.vm.network = "public_network"
 
-  # Налаштовуємо ресурси віртуальної машини
-  linux.vm.provider "virtualbox" do |vb|
-    vb.memory = "4096" # Виділяємо 4 ГБ оперативної пам'яті
-    vb.cpus = 4        # Виділяємо 4 процесори
+    # Налаштовуємо ресурси віртуальної машини
+    linux.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096" # Виділяємо 4 ГБ оперативної пам'яті
+      vb.cpus = 4        # Виділяємо 4 процесори
   end
   
   # Основний скрипт налаштування для Linux VM
@@ -63,8 +64,8 @@ Vagrant.configure("2") do |config|
           fi
       fi
 
-      # Додавання джерела BaGet та збірка проекту Lab4
-      cd /vagrant/Lab4
+      # Додавання джерела BaGet та збірка проекту Lab4.Source
+      cd /vagrant/Lab4.Source
       echo "Configuring BaGet as a NuGet source..."
       dotnet nuget add source http://localhost:5000/v3/index.json -n BaGet
       if dotnet nuget list source | grep -q "BaGet"; then
@@ -74,12 +75,12 @@ Vagrant.configure("2") do |config|
           exit 1
       fi
 
-      echo "Building Lab4 project..."
+      echo "Building Lab4.Source project..."
       dotnet build
       if [ -f "./bin/Debug/VShapoval.1.0.0.nupkg" ]; then
-          echo "Lab4 project built successfully"
+          echo "Lab4.Source project built successfully"
       else
-          echo "Failed to build Lab4 project. Exiting..."
+          echo "Failed to build Lab4.Source project. Exiting..."
           exit 1
       fi
 
@@ -112,7 +113,7 @@ Vagrant.configure("2") do |config|
     # Використовуємо коробку Windows 10
     windows.vm.box = "gusztavvargadr/windows-10"
     windows.vm.hostname = "windows-vm"
-    windows.vm.network :public_network, ip: "192.168.56.10"
+    windows.vm.network = "public_network"
 
     # Налаштування ресурсів VirtualBox для Windows VM
     windows.vm.provider "virtualbox" do |vb|
@@ -181,11 +182,11 @@ Vagrant.configure("2") do |config|
 
       # Налаштування BaGet як джерела NuGet
       Write-Host "Configuring BaGet as a NuGet source..."
-      cd /vagrant/Lab4
+      cd /vagrant/Lab4.Source
       dotnet nuget add source http://localhost:5000/v3/index.json -n BaGet
 
-      # Побудова проєкту Lab4
-      Write-Host "Building Lab4 project..."
+      # Побудова проєкту Lab4.Source
+      Write-Host "Building Lab4.Source project..."
       dotnet build
 
       # Перевірка пакета у BaGet і завантаження, якщо він відсутній

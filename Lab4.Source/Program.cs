@@ -47,7 +47,7 @@ namespace Lab4.Source
             [Required]
             public string LabPath { get; set; } = string.Empty;
 
-            private void OnExecute()  // Change this to public
+            private void OnExecute()
             {
                 if (string.IsNullOrEmpty(LabPath))
                 {
