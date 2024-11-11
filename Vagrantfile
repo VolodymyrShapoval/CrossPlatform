@@ -102,7 +102,7 @@ Vagrant.configure("2") do |config|
 
       # Встановлення інструмента
       echo "Installing tool VShapoval globally..."
-      dotnet tool install --global VShapoval --version 1.0.0 --add-source http://localhost:5000/v3/index.json
+      dotnet tool install VShapoval --version 1.0.0 --tool-path /bin --add-source http://localhost:5000/v3/index.json
 
       echo "Run 'Lab4' to launch the tool."
     SHELL
