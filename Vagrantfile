@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "linux" do |linux|
     linux.vm.box = "hashicorp/bionic64"
     linux.vm.hostname = "linux-vm"
-    linux.vm.network = "public_network"
+    linux.vm.network "public_network"
 
     # Налаштовуємо ресурси віртуальної машини
     linux.vm.provider "virtualbox" do |vb|
@@ -113,7 +113,7 @@ Vagrant.configure("2") do |config|
     # Використовуємо коробку Windows 10
     windows.vm.box = "gusztavvargadr/windows-10"
     windows.vm.hostname = "windows-vm"
-    windows.vm.network = "public_network"
+    windows.vm.network "public_network"
 
     # Налаштування ресурсів VirtualBox для Windows VM
     windows.vm.provider "virtualbox" do |vb|
