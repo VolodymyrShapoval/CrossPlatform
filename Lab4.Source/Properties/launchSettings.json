@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Lab4.Source": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "run lab1"
     }
   }
 }

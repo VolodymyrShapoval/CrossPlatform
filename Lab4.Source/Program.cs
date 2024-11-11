@@ -74,9 +74,9 @@ namespace Lab4.Source
         [Command("lab1", Description = "Run lab 1")]
         private class Lab1Command : LabCommandBase
         {
-            protected override void OnLabExecute()
+            protected override void OnExecute()
             {
-                SetPath("Lab1");
+                base.OnExecute();
                 LabsLibrary.ExecuteLab(1, InputFilePath!, OutputFilePath!);
             }
         }
@@ -84,9 +84,9 @@ namespace Lab4.Source
         [Command("lab2", Description = "Run lab 2")]
         private class Lab2Command : LabCommandBase
         {
-            protected override void OnLabExecute()
+            protected override void OnExecute()
             {
-                SetPath("Lab2");
+                base.OnExecute();
                 LabsLibrary.ExecuteLab(2, InputFilePath!, OutputFilePath!);
             }
         }
@@ -94,9 +94,9 @@ namespace Lab4.Source
         [Command("lab3", Description = "Run lab 3")]
         private class Lab3Command : LabCommandBase
         {
-            protected override void OnLabExecute()
+            protected override void OnExecute()
             {
-                SetPath("Lab3");
+                base.OnExecute();
                 LabsLibrary.ExecuteLab(3, InputFilePath!, OutputFilePath!);
             }
         }
@@ -109,9 +109,8 @@ namespace Lab4.Source
             [Option("-o|--output <OUTPUT>", "Output file", CommandOptionType.SingleValue)]
             public string? OutputFilePath { get; set; } = null;
 
-            protected abstract void OnLabExecute();
 
-            protected void SetPath(string folderName)
+            protected void SetPath()
             {
                 // 1. Якщо шлях до файлу заданий параметрами консолі 
                 if (!string.IsNullOrEmpty(InputFilePath) && !string.IsNullOrEmpty(OutputFilePath))
@@ -120,23 +119,30 @@ namespace Lab4.Source
                 // 2. Перевірка значення змінної “LAB_PATH”
                 EnvironmentVariableTarget target = EnvironmentVariableTarget.User;
                 string? envPath = Environment.GetEnvironmentVariable("LAB_PATH", target);
-                if(!string.IsNullOrEmpty(envPath))
+                if (!string.IsNullOrEmpty(envPath))
                 {
                     InputFilePath ??= Path.Combine(envPath, "input.txt");
                     OutputFilePath ??= Path.Combine(envPath, "output.txt");
+                    return;
                 }
 
-                // 3. Використання базового шляху, якщо не задано інші шляхи
-                InputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "input.txt");
-                OutputFilePath ??= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", "..", "..", "Files", folderName, "output.txt");
+                // 3. Перевірка наявності файлу index.txt в домашній директорії користувача
+                string homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string indexFilePath = Path.Combine(homeDirectory, "input.txt");
+                if (File.Exists(indexFilePath))
+                {
+                    InputFilePath ??= indexFilePath;
+                    OutputFilePath ??= Path.Combine(homeDirectory, "output.txt");
+                    return;
+                }
 
-                if(!File.Exists(InputFilePath))
+                if (!File.Exists(InputFilePath))
                     throw new Exception("Could not find the specified input file.");
             }
 
-            protected void OnExecute()
+            protected virtual void OnExecute()
             {
-                OnLabExecute();
+                SetPath();
             }
         }
     }
