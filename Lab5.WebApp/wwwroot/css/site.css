@@ -38,6 +38,10 @@ body {
     }
 }
 
+input{
+    color: black;
+}
+
 button{
     width: 12.5rem;
     height: 5rem;
