@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class DoodleJumpController : Controller
+    public class MysticChessController : Controller
     {
-        // GET: DoodleJumpController
+        // GET: MysticChessController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: DoodleJumpController/Details/5
+        // GET: MysticChessController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: DoodleJumpController/Create
+        // GET: MysticChessController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Create
+        // POST: MysticChessController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: DoodleJumpController/Edit/5
+        // GET: MysticChessController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Edit/5
+        // POST: MysticChessController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: DoodleJumpController/Delete/5
+        // GET: MysticChessController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Delete/5
+        // POST: MysticChessController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

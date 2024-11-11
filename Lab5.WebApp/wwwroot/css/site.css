@@ -3,6 +3,8 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: rgb(22, 22, 22);
+    color: #fff;
 }
 
 /* Wrapping element */
@@ -34,4 +36,24 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+button{
+    width: 12.5rem;
+    height: 5rem;
+    font-size: 20px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    background-color: #000;
+    color: #fff;
+}
+
+button:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.navbar{
+    font-size: 1.5rem;
+    background-color: #000;
 }

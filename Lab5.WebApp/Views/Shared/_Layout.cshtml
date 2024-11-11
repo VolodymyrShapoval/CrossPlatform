@@ -34,8 +34,8 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="HeadsAndTails" asp-action="Index">Heads&Tails</a></li> // App1Controller
-                        <li><a asp-area="" asp-controller="#" asp-action="Index">DoodleJump</a></li> // App2Controller
-                        <li><a asp-area="" asp-controller="#" asp-action="Index">MysticChess</a></li> // App3Controller
+                        <li><a asp-area="" asp-controller="DoodleJump" asp-action="Index">DoodleJump</a></li> // App2Controller
+                        <li><a asp-area="" asp-controller="MysticChess" asp-action="Index">MysticChess</a></li> // App3Controller
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -59,7 +59,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - SampleMvcApp</p>
+            <strong>
+                <p>Made by <a href="https://github.com/VolodymyrShapoval/CrossPlatform">Volodymyr Shapoval</a>
+                <p>&copy; 2024 - MyWebApp</p>
+            </strong>
         </footer>
     </div>
 
