@@ -2,7 +2,7 @@
 
 This example shows how to add login/logout and extract user profile information from claims.
 
-You can read a quickstart for this sample [here](https://auth0.com/docs/quickstart/webapp/aspnet-core).
+You can read a quickstart for this sample [here](https://auth0.com/docs/quickstart/Lab5.WebApp/aspnet-core).
 
 ## Requirements
 
@@ -41,7 +41,7 @@ sh exec.sh
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddAuth0WebAppAuthentication(options => {
+    services.AddAuth0Lab5.WebAppAuthentication(options => {
         options.Domain = Configuration["Auth0:Domain"];
         options.ClientId = Configuration["Auth0:ClientId"];
     });

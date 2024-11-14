@@ -1,4 +1,5 @@
-﻿@{
+﻿@model dynamic
+@{
     ViewData["Title"] = "Heads And Tails App";
 }
 
@@ -23,11 +24,11 @@
             <h3><strong>Output data:</strong></h3>
             <h4>У вихідний файл OUTPUT.TXT виведіть відповідь на завдання.</h4>
         </p>
-        <p style="display: flex; flex-position: row;">
-            <h3>N:<input placeholder="5" required></input></h3>
-            <h3>M:<input placeholder="2" required></input></h3>
-        </p>
-        <h3>Result:<input readonly></input></h3>
-        <h3><button><strong>Execute<strong></button></h3>
+        <form asp-action="Calculate" asp-controller="HeadsAndTails" method="get">
+            <h3>N:<input type="text" name="n" placeholder="5" required></input></h3>
+            <h3>M:<input type="text" name="m" placeholder="2" required></input></h3>
+            <h3>Result:<input type="text" name="result" value="@ViewData["Result"]" readonly></input></h3>
+            <h3><button type="submit"><strong>Execute<strong></button></h3>
+        </form>
     </div>
 </div>

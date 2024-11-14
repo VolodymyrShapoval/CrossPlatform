@@ -1,23 +1,57 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Lab4.Library;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System;
 
-namespace WebApp.Controllers
+namespace Lab5.WebApp.Controllers
 {
-    public class HeadsAndTailsController : Controller
+    public class DoodleJumpController : Controller
     {
-        // GET: HeadsAndTailsController
+        // GET: DoodleJumpController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: HeadsAndTailsController/Details/5
+        [HttpGet]
+        public IActionResult Calculate(string numberOfPlatforms, string heights)
+        {
+            if (true) // ОБОВ'ЯЗКОВО ЗМІНИТИ НА НОРМАЛЬНУ УМОВУ
+            {
+                string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\input.txt");
+                string outputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\output.txt");
+                // Перевіряємо, чи існує файл, і створюємо його, якщо ні
+                if (!System.IO.File.Exists(inputFilePath))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(inputFilePath));
+                    System.IO.File.Create(inputFilePath).Dispose();
+                    System.IO.File.Create(outputFilePath).Dispose();
+                }
+
+                // Записуємо значення змінних у файл
+                System.IO.File.WriteAllText(inputFilePath, $"{numberOfPlatforms}\n{heights}");
+
+                LabsLibrary.ExecuteLab(2, inputFilePath, outputFilePath);
+
+                string outputContent = System.IO.File.ReadAllText(outputFilePath);
+                ViewData["Result"] = outputContent;
+            }
+            else
+            {
+                ViewData["Result"] = "Помилка: невірні дані";
+            }
+
+            return View("Index");
+        }
+
+        // GET: DoodleJumpController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: HeadsAndTailsController/Create
+        // GET: DoodleJumpController/Create
         public ActionResult Create()
         {
             return View();

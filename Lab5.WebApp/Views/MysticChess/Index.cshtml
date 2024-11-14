@@ -25,10 +25,10 @@
                 У вихідний файл OUTPUT.TXT виведіть мінімальну кількість ходів, необхідну кентавру, щоб дістатися з першої клітини до другої. Якщо дістатися неможливо, слід вивести число «-1» (без лапок).
             </h4>
         </p>
-        <p style="display: flex; flex-position: row;">
-            <h3>Input:<input placeholder="A2 C6" required></input></h3>
-        </p>
-        <h3>Result:<input readonly></input></h3>
-        <h3><button><strong>Execute<strong></button></h3>
+        <form asp-action="Calculate" asp-controller="MysticChess" method="get">
+            <h3>Input:<input type="text" name="cells" placeholder="A4 F2" required></input></h3>
+            <h3>Result:<input type="text" name="result" value="@ViewData["Result"]" readonly></input></h3>
+            <h3><button type="submit"><strong>Execute<strong></button></h3>
+        </form>
     </div>
 </div>

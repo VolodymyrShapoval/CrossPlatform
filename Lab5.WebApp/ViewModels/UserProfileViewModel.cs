@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SampleMvcApp.ViewModels
+namespace Lab5.WebApp.ViewModels
 {
     public class UserProfileViewModel
     {

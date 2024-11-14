@@ -7,5 +7,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\ConsoleAppsControllers\" />
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab4.Library\Lab4.Library.csproj" />
   </ItemGroup>
 </Project>

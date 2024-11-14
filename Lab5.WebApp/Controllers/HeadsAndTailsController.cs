@@ -1,29 +1,64 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Lab4.Library;
+using System.Security.Cryptography;
+using System.IO;
+using System;
 
-namespace WebApp.Controllers
+namespace Lab5.WebApp.Controllers
 {
-    public class DoodleJumpController : Controller
+    public class HeadsAndTailsController : Controller
     {
-        // GET: DoodleJumpController
+        // GET: HeadsAndTailsController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: DoodleJumpController/Details/5
+        [HttpGet]
+        public IActionResult Calculate(string n, string m)
+        {            
+            if (int.TryParse(n, out _) && int.TryParse(m, out _))
+            {
+                string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\input.txt");
+                string outputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\output.txt");
+                // Перевіряємо, чи існує файл, і створюємо його, якщо ні
+                if (!System.IO.File.Exists(inputFilePath))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(inputFilePath));
+                    System.IO.File.Create(inputFilePath).Dispose();
+                    System.IO.File.Create(outputFilePath).Dispose();
+                }
+
+                // Записуємо значення змінних n та m у файл
+                System.IO.File.WriteAllText(inputFilePath, $"{n} {m}");
+
+                LabsLibrary.ExecuteLab(1, inputFilePath, outputFilePath);
+
+                string outputContent = System.IO.File.ReadAllText(outputFilePath);
+                ViewData["Result"] = outputContent;
+            }
+            else
+            {
+                ViewData["Result"] = "Помилка: невірні дані";
+            }
+
+            return View("Index");
+        }
+
+        // GET: HeadsAndTailsController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: DoodleJumpController/Create
+        // GET: HeadsAndTailsController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Create
+        // POST: HeadsAndTailsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +73,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: DoodleJumpController/Edit/5
+        // GET: HeadsAndTailsController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Edit/5
+        // POST: HeadsAndTailsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +94,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: DoodleJumpController/Delete/5
+        // GET: HeadsAndTailsController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: DoodleJumpController/Delete/5
+        // POST: HeadsAndTailsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

@@ -25,11 +25,11 @@
                 У вихідний файл OUTPUT.TXT запишіть однину - мінімальну кількість енергії, яку повинен витратити гравець на подолання платформ (звичайно ж у припущенні, що cheat-коди використовувати не можна).
             </h4>
         </p>
-        <p style="display: flex; flex-position: row;">
-            <h3>Number of platforms:<input placeholder="3" required></input></h3>
-            <h3>Heights of platforms:<input placeholder="1, 5, 7" required></input></h3>
-        </p>
-        <h3>Result:<input readonly></input></h3>
-        <h3><button><strong>Execute<strong></button></h3>
+        <form asp-action="Calculate" asp-controller="DoodleJump" method="get">
+            <h3>Number of platforms:<input type="text" name="numberOfPlatforms" placeholder="3" required></input></h3>
+            <h3>Heights of platforms:<input type="text" name="heights" placeholder="1, 5, 7" required></input></h3>
+            <h3>Result:<input type="text" name="result" value="@ViewData["Result"]" readonly></input></h3>
+            <h3><button type="submit"><strong>Execute<strong></button></h3>
+        </form>
     </div>
 </div>

@@ -3,15 +3,36 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using SampleMvcApp.ViewModels;
+using Lab5.WebApp.ViewModels;
 using System.Linq;
 using System.Security.Claims;
 using Auth0.AspNetCore.Authentication;
 
-namespace SampleMvcApp.Controllers
+namespace Lab5.WebApp.Controllers
 {
     public class AccountController : Controller
     {
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // ...
+                var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
+                    .WithRedirectUri("/")  // Задайте маршрут, на який буде перенаправлено після входу
+                    .Build();
+
+                await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+            }
+            return View(model);
+        }
+
         public async Task Login(string returnUrl = "/")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
