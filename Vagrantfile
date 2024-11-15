@@ -105,6 +105,10 @@ Vagrant.configure("2") do |config|
       dotnet tool install VShapoval --version 1.0.0 --tool-path /bin --add-source http://localhost:5000/v3/index.json
 
       echo "Run 'Lab4' to launch the tool."
+
+      cd /vagrant/Lab5.WebApp
+        dotnet build
+        dotnet run
     SHELL
   end
 

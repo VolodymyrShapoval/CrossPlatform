@@ -12,27 +12,6 @@ namespace Lab5.WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View(new RegisterViewModel());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // ...
-                var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-                    .WithRedirectUri("/")  // Задайте маршрут, на який буде перенаправлено після входу
-                    .Build();
-
-                await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-            }
-            return View(model);
-        }
-
         public async Task Login(string returnUrl = "/")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
@@ -60,7 +39,9 @@ namespace Lab5.WebApp.Controllers
         {
             return View(new UserProfileViewModel()
             {
+                Username = User.Claims.FirstOrDefault(c => c.Type == "username")?.Value,
                 Name = User.Identity.Name,
+                PhoneNumber = User.Claims.FirstOrDefault(c => c.Type == "phone_number")?.Value,
                 EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
                 ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value
             });
