@@ -1,7 +1,7 @@
 
 
 using Lab3.Source;
-using Lab3.Source.Methods;
+using Lab3.Library;
 using System.Reflection;
 
 namespace Lab3.Tests

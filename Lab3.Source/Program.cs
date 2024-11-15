@@ -1,4 +1,5 @@
-﻿using Lab3.Source.Methods;
+﻿//using Lab3.Source.Methods;
+using Lab3.Library;
 using System.Text.RegularExpressions;
 
 namespace Lab3.Source

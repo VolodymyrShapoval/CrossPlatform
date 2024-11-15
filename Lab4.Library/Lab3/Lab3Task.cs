@@ -1,5 +1,5 @@
 ﻿using Lab3.Source;
-using Lab3.Source.Methods;
+using Lab3.Library;
 using Lab4.Library.Interfaces;
 using System;
 using System.Collections.Generic;
