@@ -17,7 +17,7 @@ namespace Lab5.WebApp.Controllers
         [HttpGet]
         public IActionResult Calculate(string numberOfPlatforms, string heights)
         {
-            if (true) // ОБОВ'ЯЗКОВО ЗМІНИТИ НА НОРМАЛЬНУ УМОВУ
+            try
             {
                 string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\input.txt");
                 string outputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\output.txt");
@@ -37,11 +37,10 @@ namespace Lab5.WebApp.Controllers
                 string outputContent = System.IO.File.ReadAllText(outputFilePath);
                 ViewData["Result"] = outputContent;
             }
-            else
+            catch
             {
                 ViewData["Result"] = "Помилка: невірні дані";
             }
-
             return View("Index");
         }
 

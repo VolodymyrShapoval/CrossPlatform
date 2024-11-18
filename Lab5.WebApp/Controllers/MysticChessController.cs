@@ -17,7 +17,7 @@ namespace Lab5.WebApp.Controllers
         [HttpGet]
         public IActionResult Calculate(string cells)
         {
-            if (true) // ОБОВ'ЯЗКОВО ЗМІНИТИ НА НОРМАЛЬНУ УМОВУ
+            try // ОБОВ'ЯЗКОВО ЗМІНИТИ НА НОРМАЛЬНУ УМОВУ
             {
                 string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\input.txt");
                 string outputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Files\output.txt");
@@ -37,7 +37,7 @@ namespace Lab5.WebApp.Controllers
                 string outputContent = System.IO.File.ReadAllText(outputFilePath);
                 ViewData["Result"] = outputContent;
             }
-            else
+            catch
             {
                 ViewData["Result"] = "Помилка: невірні дані";
             }
