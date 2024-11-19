@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lab6.WebApp.Database.Models
 {
     public class Customer
     {
-        public string CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }

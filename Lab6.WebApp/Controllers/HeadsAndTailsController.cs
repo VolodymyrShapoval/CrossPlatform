@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System;
 
-namespace Lab5.WebApp.Controllers
+namespace Lab6.WebApp.Controllers
 {
     public class HeadsAndTailsController : Controller
     {

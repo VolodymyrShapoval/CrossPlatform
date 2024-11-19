@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Lab5.WebApp": {
+    "Lab6.WebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:3000",

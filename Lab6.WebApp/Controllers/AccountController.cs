@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Lab5.WebApp.ViewModels;
+using Lab6.WebApp.ViewModels;
 using System.Linq;
 using System.Security.Claims;
 using Auth0.AspNetCore.Authentication;
 
-namespace Lab5.WebApp.Controllers
+namespace Lab6.WebApp.Controllers
 {
     public class AccountController : Controller
     {
