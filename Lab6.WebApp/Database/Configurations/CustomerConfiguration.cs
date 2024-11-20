@@ -10,15 +10,15 @@ namespace Lab6.WebApp.Database.Configurations
         {
             builder.HasKey(c => c.CustomerId);
 
-            builder.
-                HasMany(c => c.Cars)
+            builder
+                .HasMany(c => c.Cars)
                 .WithOne(ca => ca.Customer)
-                .HasForeignKey(c => c.CustomerId);
+                .HasForeignKey(ca => ca.CustomerId);
 
-            builder.
-                HasMany(c => c.ServiceBookings)
+            builder
+                .HasMany(c => c.ServiceBookings)
                 .WithOne(sb => sb.Customer)
-                .HasForeignKey(c => c.CustomerId);
+                .HasForeignKey(sb => sb.CustomerId);
         }
     }
 }

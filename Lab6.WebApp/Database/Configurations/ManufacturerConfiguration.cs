@@ -10,9 +10,10 @@ namespace Lab6.WebApp.Database.Configurations
         {
             builder.HasKey(mf => mf.ManufacturerCode);
 
-            builder.
-                HasMany(mf => mf.Models)
-                .WithOne(mf => mf.Manufacturer);
+            builder
+                .HasMany(mf => mf.Models)
+                .WithOne(m => m.Manufacturer)
+                .HasForeignKey(m => m.ManufacturerCode);
         }
     }
 }
