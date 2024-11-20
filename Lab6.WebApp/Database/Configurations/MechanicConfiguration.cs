@@ -8,7 +8,12 @@ namespace Lab6.WebApp.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<Mechanic> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(m => m.MechanicId);
+
+            builder
+                .HasMany(m => m.MechanicsOnServices)
+                .WithOne(ms => ms.Mechanic)
+                .HasForeignKey(ms => ms.MechanicId);
         }
     }
 }

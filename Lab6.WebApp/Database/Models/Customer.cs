@@ -20,5 +20,6 @@ namespace Lab6.WebApp.Database.Models
         public string OtherCustomerDetails { get; set; }
 
         public ICollection<Car> Cars { get; set; }
+        public ICollection<ServiceBooking> ServiceBookings { get; set; }
     }
 }

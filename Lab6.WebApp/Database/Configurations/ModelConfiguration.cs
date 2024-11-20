@@ -9,6 +9,15 @@ namespace Lab6.WebApp.Database.Configurations
         public void Configure(EntityTypeBuilder<Model> builder)
         {
             builder.HasKey(m => m.ModelCode);
+
+            builder.
+                HasOne(m => m.Manufacturer)
+                .WithMany(mf => mf.Models)
+                .HasForeignKey(m => m.ManufacturerCode);
+
+            builder.
+                HasMany(m => m.Cars)
+                .WithOne(c => c.Model);
         }
     }
 }

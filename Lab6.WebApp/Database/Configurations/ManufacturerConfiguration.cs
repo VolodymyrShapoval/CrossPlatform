@@ -8,7 +8,11 @@ namespace Lab6.WebApp.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<Manufacturer> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(mf => mf.ManufacturerCode);
+
+            builder.
+                HasMany(mf => mf.Models)
+                .WithOne(mf => mf.Manufacturer);
         }
     }
 }

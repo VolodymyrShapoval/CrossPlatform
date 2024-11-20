@@ -8,7 +8,22 @@ namespace Lab6.WebApp.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<ServiceBooking> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(sb => sb.SvcBookingId);
+
+            builder
+                .HasOne(sb => sb.Car)
+                .WithMany(c => c.ServiceBookings)
+                .HasForeignKey(sb => sb.LicenceNumber);
+
+            builder
+                .HasOne(sb => sb.Customer)
+                .WithMany(c => c.ServiceBookings)
+                .HasForeignKey(sb => sb.CustomerId);
+
+            builder
+                .HasMany(sb => sb.MechanicsOnServices)
+                .WithOne(ms => ms.ServiceBooking)
+                .HasForeignKey(ms => ms.SvcBookingId);
         }
     }
 }
