@@ -15,7 +15,25 @@ namespace Lab6.WebApp.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("YourConnectionStringHere");
+            string dbProvider = "SqlLite";
+
+            switch (dbProvider)
+            {
+                case "MSSQL":
+                    optionsBuilder.UseSqlServer("Server=localhost;Database=CarServiceDB;Trusted_Connection=True;");
+                    break;
+                case "Postgres":
+                    optionsBuilder.UseNpgsql("Host=localhost;Database=CarServiceDB;Username=postgres;Password=postgres;");
+                    break;
+                case "SqlLite":
+                    optionsBuilder.UseSqlite("Data Source=CarServiceDB.sqlite");
+                    break;
+                case "InMemory":
+                    optionsBuilder.UseInMemoryDatabase("InMemoryDb");
+                    break;
+                default:
+                    throw new System.Exception("Unsupported database provider");
+            }
         }
     }
 }
