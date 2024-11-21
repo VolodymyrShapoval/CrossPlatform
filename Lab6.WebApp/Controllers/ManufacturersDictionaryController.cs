@@ -2,7 +2,7 @@
 
 namespace Lab6.WebApp.Controllers
 {
-    public class ModelsDictionaryController : Controller
+    public class ManufacturersDictionaryController : Controller
     {
         public IActionResult Index()
         {

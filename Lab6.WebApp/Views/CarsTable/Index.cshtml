@@ -1,3 +1,42 @@
-﻿@{
+﻿@model IEnumerable<Lab6.WebApp.Database.Models.Car>
 
+@{
+    ViewData["Title"] = "Cars List";
 }
+
+<h1>Cars List</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Licence Number</th>
+            <th>Model</th>
+            <th>Customer</th>
+            <th>Current Mileage</th>
+            <th>Engine Size</th>
+            <th>Other Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var car in Model)
+            {
+                <tr>
+                    <td>@car.LicenceNumber</td>
+                    <td>@car.Model?.ModelCode ?? "N/A"</td>
+                    <td>@car.Customer?.CustomerId ?? "N/A"</td>
+                    <td>@car.CurrentMileage</td>
+                    <td>@car.EngineSize</td>
+                    <td>@car.OtherCarDetails</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No cars available</td>
+            </tr>
+        }
+    </tbody>
+</table>
