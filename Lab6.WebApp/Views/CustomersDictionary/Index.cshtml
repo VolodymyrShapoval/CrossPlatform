@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Lab6.WebApp.Database.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer Directory";
+}
+
+<h1>Customer Directory</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Title</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.Title</td>
+                    <td>@customer.Gender</td>
+                    <td>@customer.EmailAddress</td>
+                    <td>@customer.PhoneNumber</td>
+                    <td>@customer.City</td>
+                    <td>@customer.State</td>
+                    <td>
+                        <a href="/Customer/Details/@customer.CustomerId" class="btn btn-info btn-sm">View</a>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="10" class="text-center">No customers found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

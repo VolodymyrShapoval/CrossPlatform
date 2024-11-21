@@ -26,7 +26,7 @@ namespace Lab6.WebApp.Database
                     optionsBuilder.UseNpgsql("Host=localhost;Database=CarServiceDB;Username=postgres;Password=postgres;");
                     break;
                 case "SqlLite":
-                    optionsBuilder.UseSqlite("Data Source=CarServiceDB.sqlite");
+                    optionsBuilder.UseSqlite("Data Source=CarServiceDB.db");
                     break;
                 case "InMemory":
                     optionsBuilder.UseInMemoryDatabase("InMemoryDb");

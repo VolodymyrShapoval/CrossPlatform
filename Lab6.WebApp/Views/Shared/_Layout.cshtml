@@ -33,9 +33,26 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a asp-area="" asp-controller="HeadsAndTails" asp-action="Index">Heads&Tails</a></li> // App1Controller
-                        <li><a asp-area="" asp-controller="DoodleJump" asp-action="Index">DoodleJump</a></li> // App2Controller
-                        <li><a asp-area="" asp-controller="MysticChess" asp-action="Index">MysticChess</a></li> // App3Controller
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Games <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="HeadsAndTails" asp-action="Index">Heads&Tails</a></li>
+                                <li><a asp-area="" asp-controller="DoodleJump" asp-action="Index">DoodleJump</a></li>
+                                <li><a asp-area="" asp-controller="MysticChess" asp-action="Index">MysticChess</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Dictionaries <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="CustomersDictionary" asp-action="Index">CustomersDictionary</a></li>
+                                <li><a asp-area="" asp-controller="ModelsDictionary" asp-action="Index">ModelsDictionary</a></li>
+                                <li><a asp-area="" asp-controller="CarsTable" asp-action="Index">CarsTable</a></li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
