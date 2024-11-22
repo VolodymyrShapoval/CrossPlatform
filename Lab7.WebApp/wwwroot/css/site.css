@@ -1,0 +1,111 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: rgb(22, 22, 22);
+    color: #fff;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+input{
+    color: black;
+}
+
+button, .search-btn{
+    width: 12.5rem;
+    height: 5rem;
+    font-size: 20px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    background-color: #000;
+    color: #fff;
+}
+
+button:hover, .search-btn:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.search-btn {
+    width: 4rem;
+    height: 1.5rem;
+    font-size: 10px;
+}
+
+.navbar{
+    font-size: 1.5rem;
+    background-color: #000;
+}
+
+table {
+    width: 100%;
+    font-size: 1.2em;
+    border-collapse: collapse;
+}
+
+table th, table tr, table td {
+    background: #000;
+    border: 1px solid #fff;
+    text-align: center;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 10px;
+    transition: all 0.5s ease;
+    color: #000;
+}
+
+.btn-sm:hover {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.btn-sm:active {
+    letter-spacing: 3px;
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}

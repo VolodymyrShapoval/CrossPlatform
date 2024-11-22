@@ -112,6 +112,48 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
+  config.vm.define "lab6" do |linux|
+    linux.vm.box = "hashicorp/bionic64"
+    linux.vm.hostname = "linux-vm-lab5"
+    linux.vm.network "public_network"
+    linux.vm.network "forwarded_port", guest: 3000, host: 3000
+
+    linux.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.cpus = 4
+    end
+    
+    linux.vm.provision "shell", run: "always", inline: <<-SHELL
+        # Update and install prerequisites
+        sudo apt-get update
+        sudo apt-get install -y wget apt-transport-https unzip
+
+        # Install .NET SDK 8.0
+        wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y dotnet-sdk-8.0
+
+        sudo timedatectl set-timezone Asia/Bangkok
+
+        # Verify .NET SDK and Runtime installations
+        dotnet --list-sdks
+        dotnet --list-runtimes
+
+        
+        cd /vagrant/Lab3.Library
+        dotnet pack --output "../Lab3Repo"
+        cd ../Lab3.Source
+        dotnet add package VShapovalChess --version 1.0.0 --source "../Lab3Repo"        
+        # Build Lab6
+        cd /vagrant/Lab6.WebApp
+
+        echo "------------------- Building Lab6 project... -------------------"
+        dotnet build
+        dotnet run
+    SHELL
+  end
+
   # ----------------------- WINDOWS CONFIGURATION --------------------------------
   config.vm.define "windows" do |windows|
     # Використовуємо коробку Windows 10

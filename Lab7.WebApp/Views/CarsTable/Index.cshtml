@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Lab7.WebApp.Database.Models.Car>
+
+@{
+    ViewData["Title"] = "Cars List";
+}
+
+<h1>Cars List</h1>
+
+<form method="get" action="/DbViews/CarsTableSearch">
+    <input type="text" name="query" placeholder="Search" />
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Licence Number</th>
+            <th>Model</th>
+            <th>Customer</th>
+            <th>Current Mileage</th>
+            <th>Engine Size</th>
+            <th>Other Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var car in Model)
+            {
+                <tr>
+                    <td>@car.LicenceNumber</td>
+                    <td>@(car.Model?.ModelName ?? "N/A")</td>
+                    <td>@(car.Customer?.FirstName + " " + car.Customer?.LastName ?? "N/A")</td>
+                    <td>@car.CurrentMileage</td>
+                    <td>@car.EngineSize</td>
+                    <td>@car.OtherCarDetails</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No cars available</td>
+            </tr>
+        }
+    </tbody>
+</table>
