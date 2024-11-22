@@ -1,6 +1,7 @@
 ﻿using Lab6.WebApp.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Lab6.WebApp.Database.Configurations
 {
@@ -27,6 +28,21 @@ namespace Lab6.WebApp.Database.Configurations
                         ms.HasKey(mos => new { mos.MechanicId, mos.SvcBookingId });
                         ms.ToTable("MechanicOnServices");
                     });
+
+            builder.HasData(
+                new Mechanic
+                {
+                    MechanicId = Guid.NewGuid(),
+                    MechanicName = "Mike Johnson",
+                    OtherMechanicDetails = "Specializes in engine repair"
+                },
+                new Mechanic
+                {
+                    MechanicId = Guid.NewGuid(),
+                    MechanicName = "Sarah Connor",
+                    OtherMechanicDetails = "Specializes in diagnostics"
+                }
+            );
         }
     }
 }

@@ -18,16 +18,18 @@ namespace Lab6.WebApp.Controllers.API
             _dbContext = dbContext;
         }
 
-        // GET: api/Manufacturers
+        // GET: api/manufacturers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Manufacturer>>> Get()
         {
-            return await _dbContext.Manufacturers
+            var manufacturers = await _dbContext.Manufacturers
                 .Include(m => m.Models)
                 .ToListAsync();
+
+            return manufacturers == null ? NotFound() : manufacturers;
         }
 
-        // GET: api/Manufacturers/[id]
+        // GET: api/manufacturers/[id]
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<Manufacturer>> Get(Guid id)
