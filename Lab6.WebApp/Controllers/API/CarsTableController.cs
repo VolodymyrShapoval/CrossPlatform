@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Lab6.WebApp.Controllers.API
 {
@@ -40,6 +41,32 @@ namespace Lab6.WebApp.Controllers.API
                 .FirstOrDefaultAsync(c => c.LicenceNumber == id);
 
             return car == null ? NotFound() : car;
+        }
+
+        // GET: api/cars/search
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<List<Car>>> Search([FromQuery] string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return BadRequest("Search term cannot be empty.");
+            }
+
+            var cars = await _dbContext.Cars
+                .Include(c => c.Model)
+                .Include(c => c.Customer)
+                .Where(c => c.Model.ModelName.Contains(query)
+                        || c.Customer.FirstName.Contains(query)
+                        || c.Customer.LastName.Contains(query))
+                .ToListAsync();
+
+            if (cars.Count == 0)
+            {
+                return NotFound("No cars found matching the search term.");
+            }
+
+            return Ok(cars);
         }
     }
 }

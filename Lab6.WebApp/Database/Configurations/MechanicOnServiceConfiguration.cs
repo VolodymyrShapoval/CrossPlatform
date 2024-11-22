@@ -10,21 +10,18 @@ namespace Lab6.WebApp.Database.Configurations
         {
             builder.HasKey(mos => new { mos.MechanicId, mos.SvcBookingId });
 
-            // Зв'язок один до багатьох із Mechanic
             builder
                 .HasOne(mos => mos.Mechanic)
                 .WithMany(m => m.MechanicsOnServices)
                 .HasForeignKey(mos => mos.MechanicId)
-                .OnDelete(DeleteBehavior.Cascade); // Каскадне видалення
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Зв'язок один до багатьох із ServiceBooking
             builder
                 .HasOne(mos => mos.ServiceBooking)
                 .WithMany(sb => sb.MechanicsOnServices)
                 .HasForeignKey(mos => mos.SvcBookingId)
-                .OnDelete(DeleteBehavior.Cascade); // Каскадне видалення
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Назва таблиці в базі даних
             builder.ToTable("MechanicOnServices");
         }
     }
