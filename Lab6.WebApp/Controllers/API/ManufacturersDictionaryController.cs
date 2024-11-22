@@ -36,6 +36,6 @@ namespace Lab6.WebApp.Controllers.API
                 .FirstOrDefaultAsync(m => m.ManufacturerCode == id);
 
             return manufacturer == null ? NotFound() : manufacturer;
-        }  
+        }
     }
 }
