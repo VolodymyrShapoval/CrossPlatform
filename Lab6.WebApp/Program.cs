@@ -17,6 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 //To use MVC we have to explicitly declare we are using it. Doing so will prevent a System.InvalidOperationException.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddAuth0WebAppAuthentication(options =>
 {
     options.Domain = builder.Configuration["Auth0:Domain"];

@@ -22,10 +22,7 @@ namespace Lab6.WebApp.Controllers.API
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Manufacturer>>> Get()
         {
-            var manufacturers = await _dbContext.Manufacturers
-                .Include(m => m.Models)
-                .ToListAsync();
-
+            var manufacturers = await _dbContext.Manufacturers.ToListAsync();
             return manufacturers == null ? NotFound() : manufacturers;
         }
 
