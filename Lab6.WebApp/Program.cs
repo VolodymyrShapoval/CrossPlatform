@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Logging;
 using Lab6.WebApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.IO;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +39,7 @@ builder.Services.AddDbContext<CarServiceCenterDbContext>(options =>
             options.UseNpgsql("Host=localhost;Database=CarServiceDB;Username=postgres;Password=postgres;");
             break;
         case "SqlLite":
-            options.UseSqlite("Data Source=CarServiceDB.db");
+            options.UseSqlite("Data Source=" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CarServiceDb.db"));
             break;
         case "InMemory":
             options.UseInMemoryDatabase("InMemoryDb");

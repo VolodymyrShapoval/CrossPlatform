@@ -21,9 +21,22 @@ namespace Lab6.WebApp.Database.Configurations
                 .HasForeignKey(sb => sb.CustomerId);
 
             builder
-                .HasMany(sb => sb.MechanicsOnServices)
-                .WithOne(ms => ms.ServiceBooking)
-                .HasForeignKey(ms => ms.SvcBookingId);
+                .HasMany(sb => sb.Mechanics)
+                .WithMany(m => m.ServiceBookings)
+                .UsingEntity<MechanicOnService>(
+                    mos => mos
+                        .HasOne(mos => mos.Mechanic)
+                        .WithMany(m => m.MechanicsOnServices)
+                        .HasForeignKey(mos => mos.MechanicId),
+                    mos => mos
+                        .HasOne(mos => mos.ServiceBooking)
+                        .WithMany(sb => sb.MechanicsOnServices)
+                        .HasForeignKey(mos => mos.SvcBookingId),
+                    mos =>
+                    {
+                        mos.HasKey(mos => new { mos.MechanicId, mos.SvcBookingId });
+                        mos.ToTable("MechanicOnServices");
+                    });
         }
     }
 }

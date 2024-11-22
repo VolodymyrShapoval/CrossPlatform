@@ -8,15 +8,24 @@ namespace Lab6.WebApp.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<MechanicOnService> builder)
         {
-            builder
-                .HasOne(ms => ms.Mechanic)
-                .WithMany(m => m.MechanicsOnServices)
-                .HasForeignKey(ms => ms.MechanicId);
+            builder.HasKey(mos => new { mos.MechanicId, mos.SvcBookingId });
 
+            // Зв'язок один до багатьох із Mechanic
             builder
-                .HasOne(ms => ms.ServiceBooking)
+                .HasOne(mos => mos.Mechanic)
+                .WithMany(m => m.MechanicsOnServices)
+                .HasForeignKey(mos => mos.MechanicId)
+                .OnDelete(DeleteBehavior.Cascade); // Каскадне видалення
+
+            // Зв'язок один до багатьох із ServiceBooking
+            builder
+                .HasOne(mos => mos.ServiceBooking)
                 .WithMany(sb => sb.MechanicsOnServices)
-                .HasForeignKey(ms => ms.SvcBookingId);
+                .HasForeignKey(mos => mos.SvcBookingId)
+                .OnDelete(DeleteBehavior.Cascade); // Каскадне видалення
+
+            // Назва таблиці в базі даних
+            builder.ToTable("MechanicOnServices");
         }
     }
 }

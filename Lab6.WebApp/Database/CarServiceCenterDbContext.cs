@@ -1,6 +1,7 @@
 ﻿using Lab6.WebApp.Database.Configurations;
 using Lab6.WebApp.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Lab6.WebApp.Database
 {
@@ -15,7 +16,10 @@ namespace Lab6.WebApp.Database
         public DbSet<MechanicOnService> MechanicsOnServices { get; set; }
 
         public CarServiceCenterDbContext(DbContextOptions<CarServiceCenterDbContext> options)
-           : base(options) { }
+           : base(options) 
+        { 
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

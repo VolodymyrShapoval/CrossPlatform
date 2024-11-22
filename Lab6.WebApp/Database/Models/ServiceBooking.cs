@@ -15,6 +15,7 @@ namespace Lab6.WebApp.Database.Models
         public DateTime DatetimeOfReceive { get; set; }
         public string OtherSvcBookingDetails { get; set; }
 
-        public ICollection<MechanicOnService> MechanicsOnServices { get; set; }
+        public ICollection<Mechanic> Mechanics { get; set; } = new List<Mechanic>();
+        public ICollection<MechanicOnService> MechanicsOnServices { get; set; } = new List<MechanicOnService>();
     }
 }

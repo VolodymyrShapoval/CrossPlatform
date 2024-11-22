@@ -14,6 +14,6 @@ namespace Lab6.WebApp.Database.Models
         public double EngineSize { get; set; }
         public string OtherCarDetails { get; set; }
 
-        public ICollection<ServiceBooking> ServiceBookings { get; set; }
+        public ICollection<ServiceBooking> ServiceBookings { get; set; } = new List<ServiceBooking>();
     }
 }
