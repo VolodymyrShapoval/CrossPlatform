@@ -55,4 +55,25 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <td>#</td>
+            <td><input type="text" id="newFirstName" placeholder="First Name" class="form-control" /></td>
+            <td><input type="text" id="newLastName" placeholder="Last Name" class="form-control" /></td>
+            <td><input type="text" id="newTitle" placeholder="Title" class="form-control" /></td>
+            <td>
+                <select id="newGender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </td>
+            <td><input type="email" id="newEmail" placeholder="Email" class="form-control" /></td>
+            <td><input type="text" id="newPhone" placeholder="Phone" class="form-control" /></td>
+            <td><input type="text" id="newCity" placeholder="City" class="form-control" /></td>
+            <td><input type="text" id="newState" placeholder="State" class="form-control" /></td>
+            <td>
+                <button type="button" id="addCustomerButton" class="btn btn-primary" onclick="addCustomer()">Add</button>
+            </td>
+        </tr>
+    </tfoot>
 </table>
