@@ -39,7 +39,7 @@ namespace Lab7.WebApp.Controllers.API
 
         // POST: api/Customers
         [HttpPost]
-        public async Task<ActionResult<Customer>> Post([FromBody] Customer customer)
+        public async Task<ActionResult<Customer>> Post(Customer customer)
         {
             if (customer == null)
                 throw new ArgumentNullException(nameof(customer));
@@ -52,6 +52,23 @@ namespace Lab7.WebApp.Controllers.API
                 new { id = customer.CustomerId },
                 customer
             );
+        }
+
+        // POST: api/Customers
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Customer>> Delete(Guid id)
+        {
+            var customer = await _dbContext.Customers.FindAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Customers.Remove(customer);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

@@ -173,12 +173,26 @@ namespace Lab7.WebApp.Controllers
                     throw new JsonException("Received empty data from the API.");
                 }
 
-                //var customer = JsonSerializer.Deserialize<Customer>(jsonData, new JsonSerializerOptions
-                //{
-                //    PropertyNameCaseInsensitive = true
-                //});
+                return RedirectToAction("CustomersDictionary", "DbViews");
+            }
+            catch
+            {
+                return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
+            }
+        }
 
-                //return View("Views/CustomersDictionary/Index.cshtml", customer);
+        [HttpPost]
+        public async Task<IActionResult> CustomerDelete(Guid id)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var response = await httpClient.DeleteAsync($"http://localhost:3000/api/customers/{id}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
+                }
 
                 return RedirectToAction("CustomersDictionary", "DbViews");
             }
