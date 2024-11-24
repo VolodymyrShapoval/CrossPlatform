@@ -206,7 +206,7 @@ namespace Lab7.WebApp.Controllers
                     throw new JsonException("Received empty data from the API.");
                 }
 
-                return RedirectToAction("ManufacturerDictionary", "DbViews");
+                return RedirectToAction("ManufacturersDictionary", "DbViews");
             }
             catch
             {
