@@ -41,4 +41,16 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <form method="post" action="/DbViews/ManufacturerAdd">
+                <td>#</td>
+                <td><input type="text" name="ManufacturerName" placeholder="Manufacturer Name" class="form-control" required /></td>
+                <td><input type="text" name="OtherManufacturerDetails" placeholder="Details" class="form-control" /></td>
+                <td>
+                    <button type="submit" class="btn btn-warning btn-sm">Add</button>
+                </td>
+            </form>
+        </tr>
+    </tfoot>
 </table>
