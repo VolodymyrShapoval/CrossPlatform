@@ -149,13 +149,18 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CustomerAdd([FromBody] Customer customer)
+        public async Task<IActionResult> CustomerAdd([FromForm] Customer customer)
         {
             try
             {
                 using var httpClient = new HttpClient();
-                var response = await httpClient.PostAsync($"http://localhost:3000/api/customers", customer);
-
+                var content = new StringContent(
+                    JsonSerializer.Serialize(customer),
+                    Encoding.UTF8,
+                    "application/json"
+                );
+                var response = await httpClient.PostAsync("http://localhost:3000/api/customers", content);
+                
                 if (!response.IsSuccessStatusCode)
                 {
                     return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
@@ -168,16 +173,18 @@ namespace Lab7.WebApp.Controllers
                     throw new JsonException("Received empty data from the API.");
                 }
 
-                var cars = JsonSerializer.Deserialize<List<Car>>(jsonData, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+                //var customer = JsonSerializer.Deserialize<Customer>(jsonData, new JsonSerializerOptions
+                //{
+                //    PropertyNameCaseInsensitive = true
+                //});
 
-                return View("Views/CarsTable/Index.cshtml", cars);
+                //return View("Views/CustomersDictionary/Index.cshtml", customer);
+
+                return RedirectToAction("CustomersDictionary", "DbViews");
             }
             catch
             {
-                return View("Views/CarsTable/Index.cshtml", new List<Car>());
+                return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
             }
         }
     }

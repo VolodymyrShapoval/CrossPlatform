@@ -47,7 +47,11 @@ namespace Lab7.WebApp.Controllers.API
             _dbContext.Customers.Add(customer);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), customer.CustomerId);
+            return CreatedAtAction(
+                nameof(Get),
+                new { id = customer.CustomerId },
+                customer
+            );
         }
     }
 }

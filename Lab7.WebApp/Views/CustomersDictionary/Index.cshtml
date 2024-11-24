@@ -57,23 +57,25 @@
     </tbody>
     <tfoot>
         <tr>
-            <td>#</td>
-            <td><input type="text" id="newFirstName" placeholder="First Name" class="form-control" /></td>
-            <td><input type="text" id="newLastName" placeholder="Last Name" class="form-control" /></td>
-            <td><input type="text" id="newTitle" placeholder="Title" class="form-control" /></td>
-            <td>
-                <select id="newGender" class="form-control">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </td>
-            <td><input type="email" id="newEmail" placeholder="Email" class="form-control" /></td>
-            <td><input type="text" id="newPhone" placeholder="Phone" class="form-control" /></td>
-            <td><input type="text" id="newCity" placeholder="City" class="form-control" /></td>
-            <td><input type="text" id="newState" placeholder="State" class="form-control" /></td>
-            <td>
-                <button type="button" id="addCustomerButton" class="btn btn-primary" onclick="addCustomer()">Add</button>
-            </td>
+            <form method="post" action="/DbViews/CustomerAdd">
+                <td>#</td>
+                <td><input type="text" name="FirstName" placeholder="First Name" class="form-control" required /></td>
+                <td><input type="text" name="LastName" placeholder="Last Name" class="form-control" required /></td>
+                <td><input type="text" name="Title" placeholder="Title" class="form-control" /></td>
+                <td>
+                    <select name="Gender" class="form-control" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+                <td><input type="email" name="EmailAddress" placeholder="Email Address" class="form-control" required /></td>
+                <td><input type="text" name="PhoneNumber" placeholder="Phone Number" class="form-control" /></td>
+                <td><input type="text" name="City" placeholder="City" class="form-control" /></td>
+                <td><input type="text" name="State" placeholder="State" class="form-control" /></td>
+                <td>
+                    <button type="submit" class="btn btn-warning btn-sm">Add</button>
+                </td>
+            </form>
         </tr>
     </tfoot>
 </table>
