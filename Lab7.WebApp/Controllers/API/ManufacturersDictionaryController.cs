@@ -40,7 +40,7 @@ namespace Lab7.WebApp.Controllers.API
 
         // POST: api/Manufacturers
         [HttpPost]
-        public async Task<ActionResult<Manufacturer>> Post([FromBody] Manufacturer manufacturer)
+        public async Task<ActionResult<Manufacturer>> Post(Manufacturer manufacturer)
         {
             if (manufacturer == null)
                 throw new ArgumentNullException(nameof(manufacturer));
@@ -48,7 +48,12 @@ namespace Lab7.WebApp.Controllers.API
             _dbContext.Manufacturers.Add(manufacturer);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), manufacturer.ManufacturerCode);
+            return CreatedAtAction(
+                nameof(Get),
+                new { id = manufacturer.ManufacturerCode },
+                manufacturer
+            );
         }
+
     }
 }
