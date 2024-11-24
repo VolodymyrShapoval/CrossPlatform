@@ -36,5 +36,18 @@ namespace Lab7.WebApp.Controllers.API
 
             return customer == null ? NotFound() : customer;
         }
+
+        // POST: api/Manufacturers
+        [HttpPost]
+        public async Task<ActionResult<Manufacturer>> Post([FromBody] Manufacturer manufacturer)
+        {
+            if (manufacturer == null)
+                throw new ArgumentNullException(nameof(manufacturer));
+
+            _dbContext.Manufacturers.Add(manufacturer);
+            await _dbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Get), manufacturer.ManufacturerCode);
+        }
     }
 }
