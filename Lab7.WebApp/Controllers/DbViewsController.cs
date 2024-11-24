@@ -182,6 +182,39 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> ManufacturerAdd([FromForm] Manufacturer manufacturer)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var content = new StringContent(
+                    JsonSerializer.Serialize(manufacturer),
+                    Encoding.UTF8,
+                    "application/json"
+                );
+                var response = await httpClient.PostAsync("http://localhost:3000/api/manufacturers", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Views/ManufacturerDictionary/Index.cshtml", new List<Manufacturer>());
+                }
+
+                var jsonData = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrEmpty(jsonData))
+                {
+                    throw new JsonException("Received empty data from the API.");
+                }
+
+                return RedirectToAction("ManufacturerDictionary", "DbViews");
+            }
+            catch
+            {
+                return View("Views/ManufacturerDictionary/Index.cshtml", new List<Manufacturer>());
+            }
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CustomerDelete(Guid id)
         {
             try
