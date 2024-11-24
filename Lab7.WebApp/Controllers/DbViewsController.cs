@@ -147,5 +147,38 @@ namespace Lab7.WebApp.Controllers
                 return View("Views/CarsTable/Index.cshtml", new List<Car>());
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CustomerAdd([FromBody] Customer customer)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var response = await httpClient.PostAsync($"http://localhost:3000/api/customers", customer);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
+                }
+
+                var jsonData = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrEmpty(jsonData))
+                {
+                    throw new JsonException("Received empty data from the API.");
+                }
+
+                var cars = JsonSerializer.Deserialize<List<Car>>(jsonData, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                return View("Views/CarsTable/Index.cshtml", cars);
+            }
+            catch
+            {
+                return View("Views/CarsTable/Index.cshtml", new List<Car>());
+            }
+        }
     }
 }
