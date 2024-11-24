@@ -234,5 +234,26 @@ namespace Lab7.WebApp.Controllers
                 return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ManufacturerDelete(Guid id)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var response = await httpClient.DeleteAsync($"http://localhost:3000/api/manufacturers/{id}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("Views/ManufacturerDictionary/Index.cshtml", new List<Manufacturer>());
+                }
+
+                return RedirectToAction("ManufacturersDictionary", "DbViews");
+            }
+            catch
+            {
+                return View("Views/ManufacturerDictionary/Index.cshtml", new List<Manufacturer>());
+            }
+        }
     }
 }
