@@ -55,5 +55,21 @@ namespace Lab7.WebApp.Controllers.API
             );
         }
 
+        // POST: api/Manufacturers
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Manufacturer>> Delete(Guid id)
+        {
+            var manufacturer = await _dbContext.Manufacturers.FindAsync(id);
+
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Manufacturers.Remove(manufacturer);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
