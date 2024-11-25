@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Lab7.WebApp.Database.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer Directory";
+}
+
+<h1>Customer Directory</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Title</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.Title</td>
+                    <td>@customer.Gender</td>
+                    <td>@customer.EmailAddress</td>
+                    <td>@customer.PhoneNumber</td>
+                    <td>@customer.City</td>
+                    <td>@customer.State</td>
+                    <td>
+                        <form asp-controller="DbViews" asp-action="CustomerDeleteV2" asp-route-id="@customer.CustomerId" method="post" onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="10" class="text-center">No customers found.</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <form method="post" action="/DbViews/CustomerAddV2">
+                <td>#</td>
+                <td><input type="text" name="FirstName" placeholder="First Name" class="form-control" required /></td>
+                <td><input type="text" name="LastName" placeholder="Last Name" class="form-control" required /></td>
+                <td><input type="text" name="Title" placeholder="Title" class="form-control" /></td>
+                <td>
+                    <select name="Gender" class="form-control" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+                <td><input type="email" name="EmailAddress" placeholder="Email Address" class="form-control" required /></td>
+                <td><input type="text" name="PhoneNumber" placeholder="Phone Number" class="form-control" /></td>
+                <td><input type="text" name="City" placeholder="City" class="form-control" /></td>
+                <td><input type="text" name="State" placeholder="State" class="form-control" /></td>
+                <td>
+                    <button type="submit" class="btn btn-warning btn-sm">Add</button>
+                </td>
+            </form>
+        </tr>
+    </tfoot>
+</table>
