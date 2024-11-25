@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lab7.WebApp.Controllers.API
+namespace Lab7.WebApp.Controllers.API.V1
 {
     [ApiController]
-    [Route("api/customers")]
+    [Route("api/v1/customers")]
     public class CustomersDictionaryController : ControllerBase
     {
         private readonly CarServiceCenterDbContext _dbContext;
+
         public CustomersDictionaryController(CarServiceCenterDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        // GET: api/customers
+        // GET: api/v1/customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> Get()
         {
@@ -26,9 +27,8 @@ namespace Lab7.WebApp.Controllers.API
             return customers == null ? NotFound() : customers;
         }
 
-        // GET: api/customers/[id]
-        [HttpGet]
-        [Route("{id}")]
+        // GET: api/v1/customers/[id]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> Get(Guid id)
         {
             var customer = await _dbContext.Customers
@@ -37,7 +37,7 @@ namespace Lab7.WebApp.Controllers.API
             return customer == null ? NotFound() : customer;
         }
 
-        // POST: api/Customers
+        // POST: api/v1/customers
         [HttpPost]
         public async Task<ActionResult<Customer>> Post(Customer customer)
         {
@@ -54,7 +54,7 @@ namespace Lab7.WebApp.Controllers.API
             );
         }
 
-        // POST: api/Customers
+        // DELETE: api/v1/customers/[id]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> Delete(Guid id)
         {
@@ -72,3 +72,4 @@ namespace Lab7.WebApp.Controllers.API
         }
     }
 }
+

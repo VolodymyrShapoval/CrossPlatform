@@ -50,7 +50,7 @@ namespace Lab7.WebApp.Controllers
             try
             {
                 using var httpClient = new HttpClient();
-                var httpResponse = await httpClient.GetAsync("http://localhost:3000/api/customers");
+                var httpResponse = await httpClient.GetAsync("http://localhost:3000/api/v1/customers");
 
                 if (!httpResponse.IsSuccessStatusCode)
                 {
@@ -159,7 +159,7 @@ namespace Lab7.WebApp.Controllers
                     Encoding.UTF8,
                     "application/json"
                 );
-                var response = await httpClient.PostAsync("http://localhost:3000/api/customers", content);
+                var response = await httpClient.PostAsync("http://localhost:3000/api/v1/customers", content);
                 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -220,7 +220,7 @@ namespace Lab7.WebApp.Controllers
             try
             {
                 using var httpClient = new HttpClient();
-                var response = await httpClient.DeleteAsync($"http://localhost:3000/api/customers/{id}");
+                var response = await httpClient.DeleteAsync($"http://localhost:3000/api/v1/customers/{id}");
 
                 if (!response.IsSuccessStatusCode)
                 {
