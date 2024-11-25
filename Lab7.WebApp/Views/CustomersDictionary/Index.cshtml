@@ -38,9 +38,7 @@
                     <td>@customer.City</td>
                     <td>@customer.State</td>
                     <td>
-                        <button asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerId" class="btn btn-info btn-sm">Details</button>
-                        <button asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId" class="btn btn-warning btn-sm">Edit</button>
-                        <form asp-controller="DbViews" asp-action="CustomerDelete" asp-route-id="@customer.CustomerId" method="post" onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                        <form asp-controller="DbViews" asp-action="CustomerDeleteV1" asp-route-id="@customer.CustomerId" method="post" onsubmit="return confirm('Are you sure you want to delete this customer?');">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
@@ -57,7 +55,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <form method="post" action="/DbViews/CustomerAdd">
+            <form method="post" action="/DbViews/CustomerAddV1">
                 <td>#</td>
                 <td><input type="text" name="FirstName" placeholder="First Name" class="form-control" required /></td>
                 <td><input type="text" name="LastName" placeholder="Last Name" class="form-control" required /></td>

@@ -13,7 +13,7 @@ namespace Lab7.WebApp.Controllers
 {
     public class DbViewsController : Controller
     {
-        public async Task<IActionResult> ManufacturersDictionary()
+        public async Task<IActionResult> ManufacturersDictionaryV1()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Lab7.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> CustomersDictionary()
+        public async Task<IActionResult> CustomersDictionaryV1()
         {
             try
             {
@@ -77,7 +77,7 @@ namespace Lab7.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> CarsTable()
+        public async Task<IActionResult> CarsTableV1()
         {
             try
             {
@@ -116,7 +116,7 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CarsTableSearch(string query)
+        public async Task<IActionResult> CarsTableSearchV1(string query)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CustomerAdd([FromForm] Customer customer)
+        public async Task<IActionResult> CustomerAddV1([FromForm] Customer customer)
         {
             try
             {
@@ -173,7 +173,7 @@ namespace Lab7.WebApp.Controllers
                     throw new JsonException("Received empty data from the API.");
                 }
 
-                return RedirectToAction("CustomersDictionary", "DbViews");
+                return RedirectToAction("CustomersDictionaryV1", "DbViews");
             }
             catch
             {
@@ -182,7 +182,7 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ManufacturerAdd([FromForm] Manufacturer manufacturer)
+        public async Task<IActionResult> ManufacturerAddV1([FromForm] Manufacturer manufacturer)
         {
             try
             {
@@ -206,7 +206,7 @@ namespace Lab7.WebApp.Controllers
                     throw new JsonException("Received empty data from the API.");
                 }
 
-                return RedirectToAction("ManufacturersDictionary", "DbViews");
+                return RedirectToAction("ManufacturersDictionaryV1", "DbViews");
             }
             catch
             {
@@ -215,7 +215,7 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CustomerDelete(Guid id)
+        public async Task<IActionResult> CustomerDeleteV1(Guid id)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace Lab7.WebApp.Controllers
                     return View("Views/CustomersDictionary/Index.cshtml", new List<Customer>());
                 }
 
-                return RedirectToAction("CustomersDictionary", "DbViews");
+                return RedirectToAction("CustomersDictionaryV1", "DbViews");
             }
             catch
             {
@@ -236,7 +236,7 @@ namespace Lab7.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ManufacturerDelete(Guid id)
+        public async Task<IActionResult> ManufacturerDeleteV1(Guid id)
         {
             try
             {
@@ -248,7 +248,7 @@ namespace Lab7.WebApp.Controllers
                     return View("Views/ManufacturerDictionary/Index.cshtml", new List<Manufacturer>());
                 }
 
-                return RedirectToAction("ManufacturersDictionary", "DbViews");
+                return RedirectToAction("ManufacturersDictionaryV1", "DbViews");
             }
             catch
             {
