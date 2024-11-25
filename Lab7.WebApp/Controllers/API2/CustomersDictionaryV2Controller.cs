@@ -26,7 +26,7 @@ namespace Lab7.WebApp.Controllers.API2
         {
             // Додано сортування за прізвищем
             var customers = await _dbContext.Customers
-                .OrderBy(c => c.LastName)
+                .OrderBy(c => c.FirstName)
                 .ToListAsync();
 
             return customers == null || customers.Count == 0 ? NotFound() : customers;
